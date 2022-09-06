@@ -22,7 +22,14 @@ public class DoublyLinkedList {
 	}
 
 	public void AddLast(DoublyLinkedListItem item) {
-
+		DoublyLinkedListItem newItem = new DoublyLinkedListItem(item);
+		if (first == null) {
+			last = newItem;
+		}else {
+			first.SetPrevius(newItem);
+		}
+		newItem.setNex(first);
+		last = newItem;
 	}
 
 	public void AddAfter(DoublyLinkedListItem afterItem, DoublyLinkedListItem newItem) {
