@@ -15,7 +15,15 @@ public class DoublyLinkedListItem {
 	public DoublyLinkedList GetList() {
 		return null;
 	}
-	
+
+	public void SetNext(DoublyLinkedListItem next) {
+		this.next = next;
+	}
+
+	public void SetPrevious(DoublyLinkedListItem previous) {
+		this.previous = previous;
+	}
+
 	public DoublyLinkedListItem GetNext() {
 		return next;
 	}
