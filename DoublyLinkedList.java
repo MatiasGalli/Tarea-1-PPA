@@ -24,16 +24,33 @@ public class DoublyLinkedList {
 	public void AddLast(DoublyLinkedListItem item) {
 		DoublyLinkedListItem newItem = new DoublyLinkedListItem(item);
 		if (first == null) {
+			first = last = newItem;
+			first.SetPrevious(null);
+			last.SetNext(null);
+		} else {
+			last.SetNext(newItem);
+			newItem.SetPrevious(last);
 			last = newItem;
-		}else {
-			first.SetPrevius(newItem);
+			last.SetNext(null);
 		}
-		newItem.setNex(first);
-		last = newItem;
 	}
 
 	public void AddAfter(DoublyLinkedListItem afterItem, DoublyLinkedListItem newItem) {
 
+		if (afterItem == null) {
+			return;
+		}
+
+		DoublyLinkedListItem newNode = new DoublyLinkedListItem(newItem);
+
+		newNode.SetNext(afterItem.GetNext());
+
+		afterItem.SetNext(newNode);
+
+		newNode.SetPrevious(afterItem);
+
+		if (newNode.GetNext() != null)
+			newNode.GetNext().SetPrevious(newNode);
 	}
 
 	public void AddBefore(DoublyLinkedListItem beforeItem, DoublyLinkedListItem newItem) {
