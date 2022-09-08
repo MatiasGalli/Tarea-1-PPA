@@ -41,20 +41,33 @@ public class DoublyLinkedList {
 			return;
 		}
 
-		DoublyLinkedListItem newNode = new DoublyLinkedListItem(newItem);
+		newItem.SetNext(afterItem.GetNext());
 
-		newNode.SetNext(afterItem.GetNext());
+		afterItem.SetNext(newItem);
 
-		afterItem.SetNext(newNode);
+		newItem.SetPrevious(afterItem);
 
-		newNode.SetPrevious(afterItem);
-
-		if (newNode.GetNext() != null)
-			newNode.GetNext().SetPrevious(newNode);
+		if (newItem.GetNext() != null)
+			newItem.GetNext().SetPrevious(newItem);
 	}
 
 	public void AddBefore(DoublyLinkedListItem beforeItem, DoublyLinkedListItem newItem) {
 
+		if (beforeItem == null) {
+			return;
+		}
+
+		newItem.SetPrevious(beforeItem.GetPrevious());
+
+		beforeItem.SetPrevious(newItem);
+
+		newItem.next = beforeItem;
+
+		if (newItem.GetPrevious() != null)
+			newItem.GetPrevious().SetNext(newItem);
+		else {
+			first = newItem;
+		}
 	}
 
 	public void Clear() {
@@ -68,7 +81,22 @@ public class DoublyLinkedList {
 	}
 
 	public void Contains(DoublyLinkedListItem item) {
-
+		if (first == null) {
+			return;
+			
+		} else {
+			int i = 0;
+			DoublyLinkedListItem current = first;
+			while (current != null && current == item) {
+				current = current.GetNext();
+				i++;
+			}
+			if (current != null) {
+				System.out.println("The node is in the position " + i + " of the list.");
+			} else {
+				System.out.println("The node has not been found.");;
+			}
+		}
 	}
 
 	public void Remove(DoublyLinkedListItem item) {
@@ -108,7 +136,7 @@ public class DoublyLinkedList {
 				DoublyLinkedListItem temp = new DoublyLinkedListItem(null);
 				temp = this.first;
 				while (temp.GetNext().GetNext() != null)
-				temp = temp.GetNext();
+					temp = temp.GetNext();
 				DoublyLinkedListItem lastNode = temp.GetNext();
 				temp.SetNext(null);
 				lastNode = null;
